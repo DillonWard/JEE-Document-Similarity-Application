@@ -21,6 +21,7 @@ public class ServiceHandler extends HttpServlet {
 	 */
 	private String environmentalVariable = null; //Demo purposes only. Rename this variable to something more appropriate
 	private static long jobNumber = 0;
+	ShingleGenerator sg = new ShingleGenerator();
 
 
 	/* This method is only called once, when the servlet is first started (like a constructor). 
@@ -128,7 +129,11 @@ public class ServiceHandler extends HttpServlet {
 		out.print("<font color=\"0000ff\">");	
 		BufferedReader br = new BufferedReader(new InputStreamReader(part.getInputStream()));
 		String line = null;
-		while ((line = br.readLine()) != null) {
+		while ((line = br.readLine()) != null) { 
+						
+			sg.generateShingle(line);
+			
+			
 			//Break each line up into shingles and do something. The servlet really should act as a
 			//contoller and dispatch this task to something else... Divide and conquer...! I've been
 			//telling you all this since 2nd year...!
