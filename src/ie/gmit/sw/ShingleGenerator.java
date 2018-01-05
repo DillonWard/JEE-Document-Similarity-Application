@@ -1,14 +1,15 @@
 package ie.gmit.sw;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 
 public class ShingleGenerator {
 
-    ArrayList<String> sentenceList = new ArrayList<String>();
-	List<Integer> shingleA = new ArrayList<Integer>();
-	String[] SENTENCE;
-	
+    ArrayList<Integer> sentenceList = new ArrayList<Integer>();
+
 	public ShingleGenerator() {
 		super();
 	}
@@ -16,22 +17,38 @@ public class ShingleGenerator {
 
 	public void generateShingle(String line){
 		
-		sentenceList.add(line);
-	    String[] sentenceArray = sentenceList.toArray(new String[sentenceList.size()]);
-
+		ArrayList<String> words = new ArrayList<String>();
+		List<List<String>> shingleParts = new ArrayList<List<String>>();
+		ArrayList<String> shingleStrSet = new ArrayList<String>();
+		ArrayList<Integer> shingleSet = new ArrayList<>(); 
 		
-	       for (int r=0;r<sentenceArray.length;r++)
-	       {
-	           SENTENCE = sentenceArray[r].split("(?<=[.!?])\\s*");
-	           for (int i=0;i<SENTENCE.length;i++)
-	           {
-	               System.out.println("Sentence " + (i+1) + ": " + SENTENCE[i]);
-	           }
+        String[] wordSplit = line.split(" ");
+        final int N = words.size();
+        final int shingleSize = 3;
+        
+        
+        for(int i = 0; i < wordSplit.length; i++){
+        	
+        	words.add(wordSplit[i]);
+        }
+        
+        
+        for (int i = 0; i < N; i += shingleSize) {
+        	shingleParts.add( new ArrayList<>(words.subList(i,  Math.min(N, i + shingleSize))));
+        
+		}
+        
+        for(List<String> part: shingleParts){
+        	shingleStrSet.add(String.join(" ", part));
+        	String shingle = String.join(" ", part);
+        	shingleSet.add(shingle.hashCode());
+        }
+        
+        System.out.println(shingleStrSet);
+        System.out.println(shingleSet);
 
-	       }
-
-		//System.out.println("asdasd" + t);
-	}
+	}       
+		
 	
 
 }
