@@ -13,7 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/dillo/Desktop/Document Similarity/db4o-8.0.249.16098-all-java5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dillo/Desktop/Document Similarity/db4o-8.0.249.16098-all-java5.jar" sourcepath="WebContent/WEB-INF/lib/db4o-8.0.249.16098-all-java5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/dillo/Desktop/Document Similarity/xtea_db4o_8.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/dillo/Downloads/servlet-api.jar.zip"/>
 	<classpathentry kind="output" path="build/classes"/>
