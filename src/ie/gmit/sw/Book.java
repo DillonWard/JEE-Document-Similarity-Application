@@ -7,7 +7,6 @@ public class Book {
 
 	private String name;
 	private Set<Integer> hashes = new TreeSet<Integer>();
-	//private ArrayList<String> hashes = new ArrayList<String>();
 	
 	public Book(){
 		
@@ -17,6 +16,16 @@ public class Book {
 		this.name = name;
 		this.hashes = hashes;
 
+	}
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

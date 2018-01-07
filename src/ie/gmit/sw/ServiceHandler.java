@@ -140,7 +140,7 @@ public class ServiceHandler extends HttpServlet {
 			//telling you all this since 2nd year...!
 			out.print(line);
 		}
-		sg.ready();
+		sg.getBooks();
 		out.print("</font>");	
 	}
 
