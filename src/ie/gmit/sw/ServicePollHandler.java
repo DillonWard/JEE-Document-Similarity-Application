@@ -9,17 +9,20 @@ public class ServicePollHandler extends HttpServlet {
 		ServletContext ctx = getServletContext();
 	}
 
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+
 		resp.setContentType("text/html"); 
 		PrintWriter out = resp.getWriter(); 
 		
 		String title = req.getParameter("txtTitle");
+		
 		String taskNumber = req.getParameter("frmTaskNumber");
 		int counter = 1;
 		if (req.getParameter("counter") != null){
 			counter = Integer.parseInt(req.getParameter("counter"));
 			counter++;
 		}
+		
 
 		out.print("<html><head><title>A JEE Application for Measuring Document Similarity</title>");		
 		out.print("</head>");		

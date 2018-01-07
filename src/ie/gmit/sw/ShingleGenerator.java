@@ -8,43 +8,28 @@ import java.util.TreeSet;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import com.db4o.query.Query;
 
 
 public class ShingleGenerator {
 
     Set<Integer> hashes = new TreeSet<Integer>();
+	ArrayList<String> words = new ArrayList<String>();
+	List<List<String>> shingleParts = new ArrayList<List<String>>();
+	ArrayList<String> shingleStrSet = new ArrayList<String>();
+
+    String title;
     
 	public ShingleGenerator() {
 		super();
 	}
 
-	public void store(Set<Integer> hashes){
-		
-		Book book = new Book("10,000 Days" , hashes);
-		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
-		
-		try	
-		{
-			//db.store(book);		
-			ObjectSet<Book> res = db.queryByExample(Book.class);
-			System.out.println(res.toString());
-			db.commit();
-		
-		}
-		finally
-		{
-		 
-			db.close();
-		}
-		
+	
+	public void bookName(String s){
+		title = s;
 	}
 
 	public void generateShingle(String line){
 		
-		ArrayList<String> words = new ArrayList<String>();
-		List<List<String>> shingleParts = new ArrayList<List<String>>();
-		ArrayList<String> shingleStrSet = new ArrayList<String>();
 		//ArrayList<Integer> shingleSet = new ArrayList<>(); 
 		
         String[] wordSplit = line.split(" ");
@@ -69,11 +54,47 @@ public class ShingleGenerator {
         	String shingle = String.join(" ", part);
         	hashes.add(shingle.hashCode());
         }
-        
-        store(hashes);
-        
-	}       
-		
+	}   	
 	
+	public void ready(){
+        store(hashes);
 
+	}
+	
+	public static void listResult(ObjectSet result) {
+		
+		System.out.println(result.size());
+		
+		 while(result.hasNext()) {
+		
+			 System.out.println(result.next());
+		
+		 }
+		
+	}
+	
+	public void store(Set<Integer> hashes){
+		
+		Book book = new Book(title, hashes);
+
+		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
+		
+		try	
+		{
+			ObjectSet b = db.queryByExample(Book.class);
+			listResult(b);
+			db.commit();
+		}
+		
+		catch(Exception e)
+		{
+			db.rollback();
+		}
+		
+		finally
+		{
+			db.close();
+		}
+		
+	}
 }

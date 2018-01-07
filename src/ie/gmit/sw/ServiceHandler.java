@@ -56,6 +56,7 @@ public class ServiceHandler extends HttpServlet {
 		
 		//Step 3) Get any submitted form data. These variables are local to this method and thread safe...
 		String title = req.getParameter("txtTitle");
+		sg.bookName(title);
 		String taskNumber = req.getParameter("frmTaskNumber");
 		Part part = req.getPart("txtDocument");
 
@@ -139,6 +140,7 @@ public class ServiceHandler extends HttpServlet {
 			//telling you all this since 2nd year...!
 			out.print(line);
 		}
+		sg.ready();
 		out.print("</font>");	
 	}
 
