@@ -56,7 +56,6 @@ public class ServiceHandler extends HttpServlet {
 		
 		//Step 3) Get any submitted form data. These variables are local to this method and thread safe...
 		String title = req.getParameter("txtTitle");
-		sg.bookName(title);
 		String taskNumber = req.getParameter("frmTaskNumber");
 		Part part = req.getPart("txtDocument");
 
@@ -131,16 +130,14 @@ public class ServiceHandler extends HttpServlet {
 		BufferedReader br = new BufferedReader(new InputStreamReader(part.getInputStream()));
 		String line = null;
 		while ((line = br.readLine()) != null) { 
-						
 			sg.generateShingle(line);
-			
-			
 			//Break each line up into shingles and do something. The servlet really should act as a
 			//contoller and dispatch this task to something else... Divide and conquer...! I've been
 			//telling you all this since 2nd year...!
 			out.print(line);
 		}
-		sg.getBooks();
+		sg.getTitle(title);
+
 		out.print("</font>");	
 	}
 

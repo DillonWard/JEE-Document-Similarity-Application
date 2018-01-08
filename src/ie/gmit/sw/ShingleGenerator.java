@@ -2,31 +2,31 @@ package ie.gmit.sw;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 
-public class ShingleGenerator {
+public class ShingleGenerator implements Shingle {
 
-	Set<Integer> hashes = new TreeSet<Integer>();
-	Set<Integer> bookHashes = new TreeSet<Integer>();	
-	
-	ArrayList<String> words = new ArrayList<String>();
-	ArrayList<String> shingleStrSet = new ArrayList<String>();
-	
-	List<List<String>> shingleParts = new ArrayList<List<String>>();
+	private Set<Integer> hashes = new TreeSet<Integer>();
+	private Set<Integer> bookHashes = new TreeSet<Integer>();
+	private Set<Integer> bookMinHash = new TreeSet<Integer>(); 
 
-	Book book = new Book();	
-	String title;
+	private ArrayList<String> words = new ArrayList<String>();
+	private ArrayList<String> shingleStrSet = new ArrayList<String>();
+
+	private List<List<String>> shingleParts = new ArrayList<List<String>>();
+	
+	private String title;	
+
+	Book book = new Book();
+	ComputeJaccard comp = new ComputeJaccard();
 
 	public ShingleGenerator() {
 		super();
-	}
-
-	public void bookName(String s) {
-		title = s;
 	}
 
 	public void generateShingle(String line) {
@@ -34,7 +34,6 @@ public class ShingleGenerator {
 		String[] wordSplit = line.split(" ");
 		final int N = words.size();
 		final int shingleSize = 3;
-
 
 		for (int i = 0; i < wordSplit.length; i++) {
 
@@ -48,24 +47,74 @@ public class ShingleGenerator {
 
 		for (List<String> part : shingleParts) {
 			shingleStrSet.add(String.join(" ", part));
-			String shingle = String.join(" ", part);
-			hashes.add(shingle.hashCode());
+			
 		}
+		
+		minHash(shingleStrSet);
+	}
+
+
+	public Set<Integer> minHash(List<String> shingles){
+		int k = 200;
+		Random r = new Random(5);
+		
+		for (int i = 0; i < k; i++) { // Create k random integers
+			hashes.add(r.nextInt());
+		}
+		
+		for(Integer hash: hashes){
+			int min = Integer.MAX_VALUE;
+			
+			for(String word: shingles){
+				
+				int minHash = word.hashCode() ^ hash;
+				
+				if(minHash < min)
+					min = minHash;
+			}
+
+			bookMinHash.add(min);
+		}
+	
+		
+		return bookMinHash;
+	}
+	
+
+	public void storeBook(Set<Integer> hashes) {
+		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
+
+		Book newBook = new Book(title, hashes);
+
+		try {
+			db.store(newBook);
+			db.commit();
+		}
+
+		catch (Exception e) {
+
+			db.rollback();
+		}
+
+		finally {
+			db.close();
+		}
+
+		getBooks();
 	}
 
 	public void getBooks() {
-
-		//Book book = new Book(title, hashes);
-
+		
 		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
 
 		try {
-			
+
 			List<Book> library = db.queryByExample(Book.class);
 			book = library.get(0);
-			System.out.println(book.getName());
-			//db.store(book);
 			bookHashes = book.getHashes();
+			System.out.println(title);
+			System.out.println(bookMinHash);
+
 			db.commit();
 		}
 
@@ -76,6 +125,13 @@ public class ShingleGenerator {
 		finally {
 			db.close();
 		}
-
+		// comp.checkJaccard(bookHashes, hashes);
+		
 	}
+	
+	public void getTitle(String title) {
+		this.title = title;
+		storeBook(bookMinHash);
+	}
+
 }
