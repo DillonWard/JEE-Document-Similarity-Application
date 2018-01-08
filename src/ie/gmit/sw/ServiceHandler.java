@@ -22,7 +22,8 @@ public class ServiceHandler extends HttpServlet {
 	private String environmentalVariable = null; //Demo purposes only. Rename this variable to something more appropriate
 	private static long jobNumber = 0;
 	ShingleGenerator sg = new ShingleGenerator();
-
+	HasherImplementation hasher = new HasherImplementation();
+	DocumentHandlerImplementation doc = new DocumentHandlerImplementation();
 
 	/* This method is only called once, when the servlet is first started (like a constructor). 
 	 * It's the Template Patten in action! Any application-wide variables should be initialised 
@@ -127,6 +128,7 @@ public class ServiceHandler extends HttpServlet {
 		 */
 		out.print("<h3>Uploaded Document</h3>");	
 		out.print("<font color=\"0000ff\">");	
+		doc.setTitle(title);
 		BufferedReader br = new BufferedReader(new InputStreamReader(part.getInputStream()));
 		String line = null;
 		while ((line = br.readLine()) != null) { 
@@ -136,8 +138,10 @@ public class ServiceHandler extends HttpServlet {
 			//telling you all this since 2nd year...!
 			out.print(line);
 		}
-		sg.getTitle(title);
-
+		
+		hasher.submitDocument();
+		//hasher.submitDocument();
+		
 		out.print("</font>");	
 	}
 

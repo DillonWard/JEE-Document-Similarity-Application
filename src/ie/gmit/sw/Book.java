@@ -13,6 +13,7 @@ public class Book {
 	}
 	
 	public Book(String name, Set<Integer> hashes){
+		super();
 		this.name = name;
 		this.hashes = hashes;
 

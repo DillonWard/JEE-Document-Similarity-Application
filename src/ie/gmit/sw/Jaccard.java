@@ -1,5 +1,7 @@
 package ie.gmit.sw;
 
-public interface Jaccard {
+import java.util.List;
 
+public interface Jaccard {
+	public void compareJaccard(List<Book> library);
 }
