@@ -12,7 +12,6 @@ import com.db4o.ObjectContainer;
 public class ShingleGenerator implements Shingle {
 
 	private Set<Integer> hashes = new TreeSet<Integer>();
-	private Set<Integer> bookHashes = new TreeSet<Integer>();
 	private Set<Integer> bookMinHash = new TreeSet<Integer>(); 
 
 	private ArrayList<String> words = new ArrayList<String>();
@@ -21,8 +20,8 @@ public class ShingleGenerator implements Shingle {
 	private List<List<String>> shingleParts = new ArrayList<List<String>>();
 	
 	private String title;	
-
-	Book book = new Book();
+	List<Book> library;
+	Book newBook;
 	ComputeJaccard comp = new ComputeJaccard();
 
 	public ShingleGenerator() {
@@ -84,10 +83,10 @@ public class ShingleGenerator implements Shingle {
 	public void storeBook(Set<Integer> hashes) {
 		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
 
-		Book newBook = new Book(title, hashes);
+		newBook = new Book(title, hashes);
 
 		try {
-			db.store(newBook);
+			db.store(newBook);			
 			db.commit();
 		}
 
@@ -109,12 +108,8 @@ public class ShingleGenerator implements Shingle {
 
 		try {
 
-			List<Book> library = db.queryByExample(Book.class);
-			book = library.get(0);
-			bookHashes = book.getHashes();
-			System.out.println(title);
-			System.out.println(bookMinHash);
-
+			library = db.queryByExample(Book.class);
+			comp.compareJaccard(library);
 			db.commit();
 		}
 
@@ -125,7 +120,7 @@ public class ShingleGenerator implements Shingle {
 		finally {
 			db.close();
 		}
-		// comp.checkJaccard(bookHashes, hashes);
+		
 		
 	}
 	

@@ -7,4 +7,5 @@ public interface Shingle {
 
 	public void generateShingle(String line);
 	public Set<Integer> minHash(List<String> shingles);
+	public void storeBook(Set<Integer> hashes);
 }
