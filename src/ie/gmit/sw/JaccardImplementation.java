@@ -16,9 +16,10 @@ public class JaccardImplementation {
 	private ArrayList<Double> results = new ArrayList<Double>();
 
 	/**
-	 * Split jaccard.
+	 * Split jaccard by passing in a list of objects and comparing
+	 *   each in the list against the most recently added one.
 	 *
-	 * @param library the library
+	 * @param library 
 	 */
 	public void splitJaccard(List<Book> library){
 		
@@ -59,7 +60,7 @@ public class JaccardImplementation {
 	/**
 	 * Gets the jaccard.
 	 *
-	 * @return the jaccard
+	 * @return the jaccard result
 	 */
 	public ArrayList<Double> getJaccard(){
 		

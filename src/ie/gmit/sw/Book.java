@@ -22,14 +22,13 @@ public class Book {
 	 * Instantiates a new book.
 	 */
 	public Book(){
-		
 	}
 	
 	/**
 	 * Instantiates a new book.
-	 *
-	 * @param name the name
-	 * @param hashes the hashes
+	 * Sets the name and the hashes of a book to be passed to the database
+	 * @param name 
+	 * @param hashes
 	 */
 	public Book(String name, Set<Integer> hashes){
 		super();
@@ -40,7 +39,7 @@ public class Book {
 
 	/**
 	 * Gets the hashes.
-	 *
+	 * 
 	 * @return the hashes
 	 */
 	public Set<Integer> getHashes() {

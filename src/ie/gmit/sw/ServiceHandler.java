@@ -21,9 +21,9 @@ public class ServiceHandler extends HttpServlet {
 	 */
 	private String environmentalVariable = null; //Demo purposes only. Rename this variable to something more appropriate
 	private static long jobNumber = 0;
-	Controller run = new Controller();
+	ControllerProxy proxy = new ControllerProxy();
 
-	String result = run.getResults();
+	String result = proxy.getResults();
 	/* This method is only called once, when the servlet is first started (like a constructor). 
 	 * It's the Template Patten in action! Any application-wide variables should be initialised 
 	 * here. Note that if you set the xml element <load-on-startup>1</load-on-startup>, this
@@ -130,15 +130,15 @@ public class ServiceHandler extends HttpServlet {
 		out.print("<font color=\"0000ff\">");	
 		BufferedReader br = new BufferedReader(new InputStreamReader(part.getInputStream()));
 		String line = null;
-		run.setTitle(title);
+		proxy.setTitle(title);
 		while ((line = br.readLine()) != null) { 
-			run.generateShingles(line);
+			proxy.generateShingles(line);
 			//Break each line up into shingles and do something. The servlet really should act as a
 			//contoller and dispatch this task to something else... Divide and conquer...! I've been
 			//telling you all this since 2nd year...!
 			out.print(line);
 		}
-		run.minHasher();
+		proxy.minHasher();
 		
 		out.print("</font>");	
 	}
