@@ -1,6 +1,7 @@
 package ie.gmit.sw;
 
 import java.util.List;
+import java.util.Set;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -13,12 +14,11 @@ public interface Jaccard {
 	 *
 	 * @param library the library
 	 */
-	public void compareJaccard(List<Book> library);
-	
+	public void splitJaccard(List<Book> library);	
 	/**
 	 * Split jaccard.
 	 *
 	 * @param library the library
 	 */
-	public void splitJaccard(List<Book> library);
+	public void compareJaccard(Set<Integer> a, Set<Integer> b);
 }

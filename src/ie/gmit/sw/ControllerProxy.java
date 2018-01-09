@@ -1,6 +1,7 @@
 package ie.gmit.sw;
 
-public class ControllerProxy {
+
+public class ControllerProxy implements Controller{
 	
 	ControllerImplementation cont = new ControllerImplementation();
 

@@ -9,7 +9,7 @@ import java.util.TreeSet;
  * The Class Controller.
  */
 // Controller - Class that is responsible for all classes executing
-public class ControllerImplementation {
+public class ControllerImplementation implements Controller{
 	
 	/** The hasher. */
 	// initializes instances of classes that are going to be used	

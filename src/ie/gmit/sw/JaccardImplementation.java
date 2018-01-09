@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class JaccardImplementation {
+public class JaccardImplementation implements Jaccard{
 	
 	private double jaccardIndex;
 	private int intersection;

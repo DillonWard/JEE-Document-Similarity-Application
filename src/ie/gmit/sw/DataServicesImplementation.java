@@ -60,7 +60,7 @@ public class DataServicesImplementation implements DataServices {
 	/* (non-Javadoc)
 	 * @see ie.gmit.sw.DataServices#getBooks()
 	 */
-	public  List<Book> getBooks() {
+	public List<Book> getBooks() {
 		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
 
 		try {
