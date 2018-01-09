@@ -1,5 +1,6 @@
 package ie.gmit.sw;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,8 +9,6 @@ import com.db4o.ObjectContainer;
 
 public class DataServicesImplementation implements DataServices {
 	private List<Book> library;
-	
-	JaccardImplementation comp = new JaccardImplementation();
 
 	public void storeBook(String title, Set<Integer> hashes) {
 		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
@@ -30,28 +29,26 @@ public class DataServicesImplementation implements DataServices {
 			db.close();
 		}
 
-		getBooks();
-
 	}
 	
-	public void getBooks() {
+	public  List<Book> getBooks() {
 		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
 
 		try {
 
-			library = db.queryByExample(Book.class);
-			comp.compareJaccard(library);
+			library = new ArrayList<Book>( db.queryByExample(Book.class));
 			db.commit();
+			return library;
 		}
 
 		catch (Exception e) {
+			
 			db.rollback();
+			return null;
 		}
 
 		finally {
 			db.close();
-		}
-
+		}		
 	}
-
 }

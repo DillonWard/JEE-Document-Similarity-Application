@@ -30,7 +30,7 @@ public class ServicePollHandler extends HttpServlet {
 		out.print("<H1>Processing request for Job#: " + taskNumber + "</H1>");
 		out.print("<H3>Document Title: " + title + "</H3>");
 		out.print("<b><font color=\"ff0000\">A total of " + counter + " polls have been made for this request.</font></b> ");
-		out.print("Place the final response here... a nice table (or graphic!) of the document similarity...");
+		//out.print("Document Similarity - " + );
 		
 		out.print("<form name=\"frmRequestDetails\">");
 		out.print("<input name=\"txtTitle\" type=\"hidden\" value=\"" + title + "\">");
