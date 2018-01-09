@@ -26,7 +26,7 @@ public class HasherImplementation implements Hasher {
 		
 		for (int i = 0; i < k; i++) { // Create k random integers
 			hashes.add(r.nextInt());
-		}
+		} // creates 200 random integers 
 		
 		for(Integer hash: hashes){
 			int min = Integer.MAX_VALUE;

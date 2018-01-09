@@ -52,6 +52,10 @@ public class DataServicesImplementation implements DataServices {
 	}
 	
 
+	/*
+	 * Creates a list of Book Objects to be compared against
+	 * populates the list of objects with entries from the database
+	 */
 	
 	/* (non-Javadoc)
 	 * @see ie.gmit.sw.DataServices#getBooks()
