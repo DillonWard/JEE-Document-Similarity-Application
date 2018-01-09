@@ -1,5 +1,9 @@
 package ie.gmit.sw;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,7 +15,7 @@ import java.util.TreeSet;
  */
 // Controller - Class that is responsible for all classes executing
 public class Controller {
-
+	
 	/** The hasher. */
 	// initializes instances of classes that are going to be used	
 	HasherImplementation hasher = new HasherImplementation();
@@ -43,6 +47,7 @@ public class Controller {
 	
 	/** The list string. */
 	private String listString = "";
+	
 
 	/**
 	 * Sets the title.
