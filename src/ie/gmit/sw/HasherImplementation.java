@@ -5,11 +5,21 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HasherImplementation.
+ */
 public class HasherImplementation implements Hasher {
 	
+	/** The hashes. */
 	private Set<Integer> hashes = new TreeSet<Integer>();
+	
+	/** The book min hash. */
 	private Set<Integer> bookMinHash = new TreeSet<Integer>();
 	
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.Hasher#minHash(java.util.List)
+	 */
 	public Set<Integer> minHash(List<String> shingles){
 		int k = 200;
 		Random r = new Random(5);

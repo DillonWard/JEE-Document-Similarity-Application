@@ -23,6 +23,7 @@ public class ServiceHandler extends HttpServlet {
 	private static long jobNumber = 0;
 	Controller run = new Controller();
 
+	String result = run.getResults();
 	/* This method is only called once, when the servlet is first started (like a constructor). 
 	 * It's the Template Patten in action! Any application-wide variables should be initialised 
 	 * here. Note that if you set the xml element <load-on-startup>1</load-on-startup>, this
@@ -105,6 +106,7 @@ public class ServiceHandler extends HttpServlet {
 		out.print("<form name=\"frmRequestDetails\" action=\"poll\">");
 		out.print("<input name=\"txtTitle\" type=\"hidden\" value=\"" + title + "\">");
 		out.print("<input name=\"frmTaskNumber\" type=\"hidden\" value=\"" + taskNumber + "\">");
+		out.print("<input name=\"result\" type=\"hidden\" value=\"" + result + "\">");
 		out.print("</form>");								
 		out.print("</body>");	
 		out.print("</html>");	

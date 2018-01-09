@@ -7,14 +7,34 @@ import java.util.Set;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 
-public class DataServicesImplementation implements DataServices {
-	private List<Book> library;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DataServicesImplementation.
+ *
+ */
+
+public class DataServicesImplementation implements DataServices {
+	
+	/** The library. */
+	private List<Book> library; // creates a new list of book objects
+
+	/* Stores a new book to the database
+	 * first the hashes and the title of the uploaded book is passed in
+	 * then the new book is stored in the database
+	 * once stored, the database is closed
+	 */
+	 
+	/*
+	 * (non-Javadoc)
+	 * @see ie.gmit.sw.DataServices#storeBook(java.lang.String, java.util.Set)
+	 */
+	
 	public void storeBook(String title, Set<Integer> hashes) {
 		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
-
 		Book newBook = new Book(title, hashes);
 
+		
 		try {
 			db.store(newBook);
 			db.commit();
@@ -31,6 +51,11 @@ public class DataServicesImplementation implements DataServices {
 
 	}
 	
+
+	
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.DataServices#getBooks()
+	 */
 	public  List<Book> getBooks() {
 		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
 
