@@ -21,11 +21,4 @@ public interface Jaccard {
 	 * @param library the library
 	 */
 	public void splitJaccard(List<Book> library);
-	
-	/**
-	 * Gets the jaccard.
-	 *
-	 * @return the jaccard
-	 */
-	public double getJaccard();
 }

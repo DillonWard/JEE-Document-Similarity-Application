@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.eclipse.jdt.internal.compiler.ast.IntersectionCastTypeReference;
-
 public class JaccardImplementation {
 	
 	private double jaccardIndex;
@@ -42,7 +40,7 @@ public class JaccardImplementation {
 	 * @param a the a
 	 * @param b the b
 	 */
-	private void compareJaccard(Set<Integer> a, Set<Integer> b) {
+	public void compareJaccard(Set<Integer> a, Set<Integer> b) {
 		
 		Set<Integer> n = new TreeSet<Integer>(a);
 		union = a.size() + b.size();
