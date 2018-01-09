@@ -15,11 +15,9 @@ public class JaccardImplementation {
 		Set<Integer> b = new TreeSet<Integer>();
 		Set<Integer> n = new TreeSet<Integer>(a);
 
-		for (int i = 0; i <= len; i++) {
+		for (int i = 0; i < len; i++) {
 
 			b = library.get(i).getHashes();
-			System.out.println(library.get(i).getHashes());
-			System.out.println(library.get(i).getName());
 			System.out.println(a.size());
 			System.out.println(b.size());
 			

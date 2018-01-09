@@ -15,8 +15,6 @@ public class DataServicesImplementation implements DataServices {
 		ObjectContainer db = Db4oEmbedded.openFile("database.db4o");
 
 		Book newBook = new Book(title, hashes);
-		
-		System.out.println(newBook);
 
 		try {
 			db.store(newBook);

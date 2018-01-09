@@ -10,8 +10,6 @@ public class HasherImplementation implements Hasher {
 	private Set<Integer> hashes = new TreeSet<Integer>();
 	private Set<Integer> bookMinHash = new TreeSet<Integer>();
 	
-	DocumentHandlerImplementation doc = new DocumentHandlerImplementation();
-
 	public Set<Integer> minHash(List<String> shingles){
 		int k = 200;
 		Random r = new Random(5);
@@ -34,11 +32,7 @@ public class HasherImplementation implements Hasher {
 			bookMinHash.add(min);
 		}
 	
-		
 		return bookMinHash;
 	}
 	
-	public void submitDocument(){
-		doc.setHashes(bookMinHash);
-	}
 }

@@ -21,9 +21,7 @@ public class ServiceHandler extends HttpServlet {
 	 */
 	private String environmentalVariable = null; //Demo purposes only. Rename this variable to something more appropriate
 	private static long jobNumber = 0;
-	ShingleGenerator sg = new ShingleGenerator();
-	HasherImplementation hasher = new HasherImplementation();
-	DocumentHandlerImplementation doc = new DocumentHandlerImplementation();
+	Controller run = new Controller();
 
 	/* This method is only called once, when the servlet is first started (like a constructor). 
 	 * It's the Template Patten in action! Any application-wide variables should be initialised 
@@ -128,19 +126,17 @@ public class ServiceHandler extends HttpServlet {
 		 */
 		out.print("<h3>Uploaded Document</h3>");	
 		out.print("<font color=\"0000ff\">");	
-		doc.setTitle(title);
 		BufferedReader br = new BufferedReader(new InputStreamReader(part.getInputStream()));
 		String line = null;
+		run.setTitle(title);
 		while ((line = br.readLine()) != null) { 
-			sg.generateShingle(line);
+			run.generateShingles(line);
 			//Break each line up into shingles and do something. The servlet really should act as a
 			//contoller and dispatch this task to something else... Divide and conquer...! I've been
 			//telling you all this since 2nd year...!
 			out.print(line);
 		}
-		
-		hasher.submitDocument();
-		//hasher.submitDocument();
+		run.minHasher();
 		
 		out.print("</font>");	
 	}

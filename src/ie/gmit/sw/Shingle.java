@@ -1,7 +1,9 @@
 package ie.gmit.sw;
 
+import java.util.ArrayList;
+
 public interface Shingle {
 
-	public void generateShingle(String line);
+	public ArrayList<String> generateShingle(String line);
 	
 }

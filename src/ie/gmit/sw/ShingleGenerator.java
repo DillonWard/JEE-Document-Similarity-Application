@@ -18,7 +18,7 @@ public class ShingleGenerator implements Shingle  {
 		super();
 	}
 
-	public void generateShingle(String line) {
+	public ArrayList<String>  generateShingle(String line) {
 
 		String[] wordSplit = line.split(" ");
 		final int N = words.size();
@@ -37,8 +37,12 @@ public class ShingleGenerator implements Shingle  {
 		for (List<String> part : shingleParts) {
 			shingleStrSet.add(String.join(" ", part));
 		}
+		//System.out.println(shingleStrSet);
+
+		//hasher.minHash(shingleStrSet);
 		
-		hasher.minHash(shingleStrSet);
+		return shingleStrSet;
+
 	}	
 	
 	
